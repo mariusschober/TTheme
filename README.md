@@ -8,6 +8,16 @@
 omarchy-theme-install https://github.com/mariusschober/TTheme
 ```
 
+That gives you the palette, wallpapers and app themes. Omarchy drops `.lua` files from a theme installed from git, so it skips `hyprland.lua` (the ink focus border and the dimming of inactive windows). To keep it, clone elsewhere and symlink the folder in; Omarchy treats a symlinked theme as your own:
+
+```bash
+git clone https://github.com/mariusschober/TTheme ~/src/TTheme
+ln -s ~/src/TTheme ~/.config/omarchy/themes/ttheme
+omarchy theme set ttheme
+```
+
+For evenings there is **TTheme Dark** on the [`dark` branch](https://github.com/mariusschober/TTheme/tree/dark), with a watcher that switches between the two at sunrise and sunset.
+
 ## Why it looks like this
 
 A desktop is an attention budget. Most themes spend it on decoration; TTheme spends it on one thing: showing you where you are and what needs you. For an ADHD mind the enemy is rarely effort. It is a dozen things shouting at the same volume. TTheme makes the volume unequal on purpose.
