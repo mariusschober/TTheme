@@ -1,0 +1,43 @@
+# TTheme — TSurfing for Omarchy
+# Built from the TSurfing CI: warm paper, ink, and one meaning per color.
+#
+#   blue    #243FB0  YOU     — human intent, the focused window, the next action
+#   magenta #6D28D9  AI      — delegated work, AI's voice, anything a machine is doing
+#   green   #28664F  MET     — done-when lines met, work accepted, progress
+#   red     #A13E38  NOT MET — real failures only, never ornament
+#   yellow  #8A5A1E  GATE    — waiting on your judgment
+#   orange  #BC4127  THE DOT — the period in "Tsurfing.": a sentence finished
+#
+# Everything else is paper and ink, so these six can be heard.
+
+mode = "light"
+
+accent    = "#243FB0"
+selection = "#DCE1F4"
+muted     = "#9A9C95"
+
+background         = "#F7F5EC"
+dark_background    = "#ECEBE3"
+darker_background  = "#E4E3DA"
+lighter_background = "#FFFDF7"
+
+foreground        = "#232C32"
+dark_foreground   = "#6B747A"
+light_foreground  = "#3A444B"
+bright_foreground = "#1F272C"
+
+red     = "#A13E38"
+yellow  = "#8A5A1E"
+orange  = "#BC4127"
+green   = "#28664F"
+cyan    = "#2F6F7A"
+blue    = "#243FB0"
+magenta = "#6D28D9"
+brown   = "#7A5230"
+
+bright_red     = "#BC4127"
+bright_yellow  = "#A06A24"
+bright_green   = "#2F7A6B"
+bright_cyan    = "#2F7A6B"
+bright_blue    = "#3550C8"
+bright_magenta = "#5B21B6"
