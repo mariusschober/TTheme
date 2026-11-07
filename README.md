@@ -7,7 +7,7 @@
 This branch is the dark companion to [TTheme](https://github.com/mariusschober/TTheme) (`main`). Install it next to the light theme as `ttheme-dark`:
 
 ```bash
-git clone -b dark https://github.com/mariusschober/TTheme ~/.config/omarchy/themes/ttheme-dark
+git clone -b dark https://github.com/mariusschober/TTheme ~/.config/omarchy/themes/ttheme-dark   # quick try; see "Keep hyprland.lua" below
 omarchy theme set ttheme-dark
 ```
 
@@ -44,6 +44,19 @@ systemctl --user enable --now ttheme-follow-nightman.service
 ```
 
 Both themes must be installed under the slugs `ttheme` and `ttheme-dark`.
+
+To override the schedule, use NightMan's sun/moon panel (a temporary light or dark lasts until the next sunrise or sunset). Picking the other TTheme in the theme menu does not stick: Omarchy writes the light/dark preference when it sets a theme, NightMan's Auto mode puts it back, and the watcher follows NightMan.
+
+**Keep `hyprland.lua`.** Omarchy drops every `.lua` file from a theme folder that is a git clone, so a plain `git clone` loses the focus border and dimming. Clone elsewhere and symlink the folders in; Omarchy treats a symlinked theme as your own:
+
+```bash
+git clone https://github.com/mariusschober/TTheme ~/src/TTheme
+git -C ~/src/TTheme worktree add ../TTheme-dark dark
+ln -s ~/src/TTheme ~/.config/omarchy/themes/ttheme
+ln -s ~/src/TTheme-dark ~/.config/omarchy/themes/ttheme-dark
+```
+
+With a transparent bar, the bar can keep the previous theme's text color after a switch ([omacom/omarchy#10289](https://github.com/omacom/omarchy/issues/10289)). Until that fix lands, `nightman/bar-text-resample.sh` works around it: `omarchy hook install theme-set nightman/bar-text-resample.sh`.
 
 ## Files
 

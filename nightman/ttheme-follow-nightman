@@ -2,16 +2,27 @@
 # Swap TTheme <-> TTheme Dark whenever NightMan flips the GNOME color-scheme.
 # Only acts while one of the two TTheme variants is the current theme,
 # so picking any other Omarchy theme is left alone.
+#
+# omarchy theme set writes color-scheme itself, and NightMan (Auto mode)
+# reverts a change that disagrees with the schedule. Wait for the value to
+# settle and act on where it lands, so a manual pick never starts a second
+# theme switch while the first is still running.
+
+SETTLE_SECONDS=3
+
+scheme() { gsettings get org.gnome.desktop.interface color-scheme; }
 
 apply() {
-  local scheme="$1" current target
+  local current target
   current=$(omarchy theme current 2>/dev/null | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
   case "$current" in ttheme|ttheme-dark) ;; *) return ;; esac
-  [[ $scheme == *prefer-dark* ]] && target=ttheme-dark || target=ttheme
+  [[ $(scheme) == *prefer-dark* ]] && target=ttheme-dark || target=ttheme
   [[ $current == "$target" ]] || omarchy theme set "$target"
 }
 
-apply "$(gsettings get org.gnome.desktop.interface color-scheme)"
-gsettings monitor org.gnome.desktop.interface color-scheme | while read -r _ value; do
-  apply "$value"
+apply
+gsettings monitor org.gnome.desktop.interface color-scheme | while read -r _; do
+  # Drain the burst of changes, then act once on the final value.
+  while read -r -t "$SETTLE_SECONDS" _; do :; done
+  apply
 done
