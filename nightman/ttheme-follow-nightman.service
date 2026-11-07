@@ -1,0 +1,12 @@
+[Unit]
+Description=Switch TTheme light/dark with NightMan
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/ttheme-follow-nightman
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target

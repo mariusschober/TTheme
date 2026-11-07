@@ -1,0 +1,17 @@
+#!/bin/bash
+# Swap TTheme <-> TTheme Dark whenever NightMan flips the GNOME color-scheme.
+# Only acts while one of the two TTheme variants is the current theme,
+# so picking any other Omarchy theme is left alone.
+
+apply() {
+  local scheme="$1" current target
+  current=$(omarchy theme current 2>/dev/null | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+  case "$current" in ttheme|ttheme-dark) ;; *) return ;; esac
+  [[ $scheme == *prefer-dark* ]] && target=ttheme-dark || target=ttheme
+  [[ $current == "$target" ]] || omarchy theme set "$target"
+}
+
+apply "$(gsettings get org.gnome.desktop.interface color-scheme)"
+gsettings monitor org.gnome.desktop.interface color-scheme | while read -r _ value; do
+  apply "$value"
+done

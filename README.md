@@ -1,45 +1,50 @@
-# TTheme
+# TTheme Dark
 
-**TSurfing for Omarchy.** Warm paper, ink, and one meaning per color.
+**TSurfing for Omarchy, after sunset.** Night ink, paper text, and still one meaning per color.
 
-![TTheme](preview.png)
+![TTheme Dark](preview.png)
+
+This branch is the dark companion to [TTheme](https://github.com/mariusschober/TTheme) (`main`). Install it next to the light theme as `ttheme-dark`:
 
 ```bash
-omarchy-theme-install https://github.com/mariusschober/TTheme
+git clone -b dark https://github.com/mariusschober/TTheme ~/.config/omarchy/themes/ttheme-dark
+omarchy theme set ttheme-dark
 ```
 
-## Why it looks like this
+## Same grammar, darker ground
 
-A desktop is an attention budget. Most themes spend it on decoration; TTheme spends it on one thing: showing you where you are and what needs you. For an ADHD mind the enemy is rarely effort. It is a dozen things shouting at the same volume. TTheme makes the volume unequal on purpose.
-
-The ground is paper because paper is the oldest interface for thinking. It asks nothing of you. The focused window is drawn in ink; everything else stays paper and recedes slightly, so context stays one glance away without competing.
-
-## One meaning per color
-
-The palette is the TSurfing CI, and every color carries exactly one meaning in the terminal, the editor, the bar and the monitor alike.
+At night the paper becomes ink and the ink becomes paper. The six colors keep their jobs; each is lifted just enough to stay readable on a dark ground without starting to glow.
 
 | Color | Meaning |
 |---|---|
-| **Ink blue** `#243FB0` | You: human intent, the focused window, the next action |
-| **Violet** `#6D28D9` | AI: delegated work, a machine's voice |
-| **Green** `#28664F` | Met: a done-when line satisfied, work accepted |
-| **Amber-brown** `#8A5A1E` | Gate: waiting for your judgment |
-| **Red** `#A13E38` | Not met: real failures only, never ornament |
-| **The dot** `#BC4127` | The period in "Tsurfing.", a sentence finished |
+| **Ink blue** `#8297F2` | You: human intent, the focused window, the next action |
+| **Violet** `#A88BF0` | AI: delegated work, a machine's voice |
+| **Green** `#6DB894` | Met: a done-when line satisfied, work accepted |
+| **Amber** `#D4A35C` | Gate: waiting for your judgment |
+| **Red** `#E5786E` | Not met: real failures only, never ornament |
+| **The dot** `#E2643F` | The period in "Tsurfing.", a sentence finished |
 
-Red is the most rationed color. A theme that paints keywords red trains you to ignore red, and then the one real failure hides in plain sight. Violet stays quiet because watching a machine work is the task humans do worst: delegated work should be visible when you look and silent when you don't.
+The ground `#20272E` is the night sky of the **Ink** wallpaper, so the desktop and the windows on it are one surface.
 
-## Wallpapers for a conscious day
+## Wallpapers
 
-1. **Horizon**: a single ink line and the dot. The default focus field.
-2. **One thing.**: the sentence every day should end with.
-3. **Two gates**: the TSurfing loop as one line. Your intent, release, AI works, accept, done.
-4. **Tide**: an engraved contour field rising to one crest. Momentum, drawn.
-5. **Ledger**: the notebook, with one question.
-6. **Ink**: the horizon at night, for evenings and dark rooms.
+1. **Ink**: the horizon at night. The default.
+2. **Horizon**, 3. **One thing.**, 4. **Two gates**, 5. **Tide**, 6. **Ledger**: the light set, redrawn for the dark.
 
-All are 3840×2160, set in the CI's own typefaces (Instrument Serif, Newsreader, DM Sans).
+## Switching with the sun
+
+[NightMan](https://github.com/codefriendly/omarchy-nightman) flips the system light/dark preference at sunrise and sunset, but it does not change the Omarchy theme. `nightman/` closes that gap: a small watcher that sets `ttheme` by day and `ttheme-dark` by night, and stays out of the way when any other theme is active.
+
+```bash
+omarchy plugin add https://github.com/codefriendly/omarchy-nightman.git --enable
+install -Dm755 nightman/ttheme-follow-nightman ~/.local/bin/ttheme-follow-nightman
+install -Dm644 nightman/ttheme-follow-nightman.service ~/.config/systemd/user/ttheme-follow-nightman.service
+systemctl --user daemon-reload
+systemctl --user enable --now ttheme-follow-nightman.service
+```
+
+Both themes must be installed under the slugs `ttheme` and `ttheme-dark`.
 
 ## Files
 
-`colors.toml` is the single source of truth; Omarchy generates terminals, Neovim, VS Code, the bar, menus and notifications from it. `hyprland.lua` sets the ink focus border and gentle dimming of inactive windows (raise `dim_strength` for deep-work sessions). `btop.theme`, `chromium.theme`, `shell.lock.toml`, `icons.theme` and `keyboard.rgb` complete the set.
+`colors.toml` is the single source of truth (`mode = "dark"`); Omarchy generates terminals, Neovim, VS Code, the bar, menus and notifications from it. `hyprland.lua` draws the focus border in ink blue and dims inactive windows gently. `btop.theme`, `chromium.theme`, `shell.lock.toml`, `unlock.png`, `icons.theme` (Yaru-blue-dark) and `keyboard.rgb` complete the set.

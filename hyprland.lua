@@ -1,7 +1,7 @@
--- TTheme: attention lives in exactly one place.
--- The focused window is drawn in ink; everything else is paper.
-local active_border_color   = "rgb(243fb0)"
-local inactive_border_color = "rgba(e4e3dacc)"
+-- TTheme Dark: attention lives in exactly one place.
+-- The focused window is drawn in lamplight ink-blue; everything else is night.
+local active_border_color   = "rgb(8297f2)"
+local inactive_border_color = "rgba(2a323bcc)"
 
 hl.config({
   general = {
@@ -18,10 +18,10 @@ hl.config({
     },
   },
 
-  -- The periphery recedes but stays readable: context one glance away,
-  -- no longer competing. Raise toward 0.15 for deep-work sessions.
+  -- Dimming reads stronger on a dark ground, so it stays gentle.
+  -- Raise toward 0.15 for deep-work sessions.
   decoration = {
     dim_inactive = true,
-    dim_strength = 0.06,
+    dim_strength = 0.08,
   },
 })
